@@ -25,4 +25,3 @@ def goat_awards(csv_file):
         'most_blocks': [most_blocks, players[most_blocks]['blocks']]
     }
     
-   
