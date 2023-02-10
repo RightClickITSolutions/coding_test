@@ -18,5 +18,5 @@ const profitForProducing = numOfCarton * profitPerCarton;
 
 console.log("Number of cartons needed: " + numOfCarton);
 console.log("Cost of producing milk: ₦" + costOfProducing);
-console.log("Profit for producing milk: $" + profitForProducing);
+console.log("Profit for producing milk: ₦" + profitForProducing);
 // Outputs results
