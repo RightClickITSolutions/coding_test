@@ -101,3 +101,5 @@ function displayResultTable(positions) {
 // displayTable();
 
 const word = prompt("Enter the word to search for in UPPERCASE: "); // get the word to search for from the user
+
+
