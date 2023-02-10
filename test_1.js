@@ -8,3 +8,7 @@ However, in computer memory, 1 KB is equal to 1,024 bytes, and so on. So the act
 Write a program that prompts the user to enter the size of the hard drive specified by the manufacturer, on the hard drive box, and outputs the actual storage capacity of the hard drive.
 
  */
+
+const HardDrive = prompt("Enter the size of the your hard drive ");
+const printActual = (HardDrive.valueOf() * 37.25) / 40;
+alert("Actual storage capacity of the hard drive is " + printActual);
