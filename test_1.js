@@ -8,3 +8,20 @@ However, in computer memory, 1 KB is equal to 1,024 bytes, and so on. So the act
 Write a program that prompts the user to enter the size of the hard drive specified by the manufacturer, on the hard drive box, and outputs the actual storage capacity of the hard drive.
 
  */
+
+
+//ANSWERS
+
+// This code takes in the value of a specified hard drive storage capacity, and returns the actual storage capacity.
+
+let fake = prompt('Enter the specified hard drive storage capacity in GB')
+let fakeint = parseFloat(fake, 10)
+
+let fakebyte = fakeint * 1000 * 1000 * 1000
+
+let real = fakebyte / (1024*1024*1024)
+let realapprox = real.toFixed(2)
+
+// To fixed method converts the value to 2 decimal places
+
+console.log('The actual hard drive storage capacity is ' + realapprox + ' GB');
