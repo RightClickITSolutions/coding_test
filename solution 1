@@ -1,0 +1,7 @@
+def convert_to_gb(gb):
+    return gb * 1000**3 / (1024**3)
+
+manufacturer_gb = float(input("40GB): ")) Enter the size of the hard drive specified by the manufacturer here
+actual_gb = convert_to_gb(manufacturer_gb)
+
+print("The actual storage capacity of the hard drive is {:.2f} GB".format(actual_gb))
