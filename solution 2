@@ -1,0 +1,14 @@
+def main():
+    
+    # Calculate cost of producing one carton of milk
+    cost = MILK_VOLUME * PRODUCTION_COST
+
+    # Calculate profit from one carton of milk
+    profit = cost + PROFIT
+# Constants
+    MILK_VOLUME = 3.78 # liters
+    PRODUCTION_COST = 250 # ₦ per liter
+    PROFIT = 180 # ₦ per carton
+    # Display results
+    print("Cost of producing one carton of milk: ₦" + str(cost))
+    print("Profit from one carton of milk: ₦" + str(profit))
