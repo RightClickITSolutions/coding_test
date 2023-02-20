@@ -8,3 +8,27 @@ However, in computer memory, 1 KB is equal to 1,024 bytes, and so on. So the act
 Write a program that prompts the user to enter the size of the hard drive specified by the manufacturer, on the hard drive box, and outputs the actual storage capacity of the hard drive.
 
  */
+// Solution
+// here i require the readLine module to use the standard input/output functions
+const readline = require("readline");
+
+// i create a constant rl to create the interface for input and output functions
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+// here i get the input from the user and  i perform some logic to determine the actual storage size of the hard drive
+rl.question(
+  "Enter the hard drive size specified by the manufacturer in GB: ",
+  (size_in_GB) => {
+    let size_in_bytes = size_in_GB * 1000 * 1000 * 1000;
+    let size_in_GB_actual = size_in_bytes / 1024 / 1024 / 1024;
+    console.log(
+      `The actual storage capacity of the hard drive is approximately ${size_in_GB_actual.toFixed(
+        2
+      )} GB.`
+    );
+    rl.close();
+  }
+);
