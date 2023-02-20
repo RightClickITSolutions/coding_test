@@ -36,3 +36,69 @@ It should return a dictionary like this:
 }
 
 */
+
+/* here i require the following
+1  file system to read the csv file
+2 csv-parser to parse the csv file
+*/
+const fs = require("fs");
+const csv = require("csv-parser");
+
+// a function that reads the csv file and returns a dictionary
+function goat_awards(csv_file) {
+  const players = {};
+  let most_points = ["", 0];
+  let most_assists = ["", 0];
+  let most_rebounds = ["", 0];
+  let most_blocks = ["", 0];
+
+  // using stream to read the csv file and return the result when its ready bit by bit inside the end
+  fs.createReadStream(csv_file)
+    .pipe(csv())
+    .on("data", (data) => {
+      const player = data.name;
+      const points = parseInt(data.points);
+      const rebounds = parseInt(data.rebounds);
+      const assists = parseInt(data.assists);
+      const blocks = parseInt(data.blocks);
+
+      if (!players[player]) {
+        players[player] = {
+          points: 0,
+          assists: 0,
+          rebounds: 0,
+          blocks: 0,
+        };
+      }
+
+      players[player].points += points;
+      players[player].assists += assists;
+      players[player].rebounds += rebounds;
+      players[player].blocks += blocks;
+
+      if (players[player].points > most_points[1]) {
+        most_points = [player, players[player].points];
+      }
+      if (players[player].assists > most_assists[1]) {
+        most_assists = [player, players[player].assists];
+      }
+      if (players[player].rebounds > most_rebounds[1]) {
+        most_rebounds = [player, players[player].rebounds];
+      }
+      if (players[player].blocks > most_blocks[1]) {
+        most_blocks = [player, players[player].blocks];
+      }
+    })
+    .on("end", () => {
+      const result = {
+        most_points: most_points,
+        most_assists: most_assists,
+        most_rebounds: most_rebounds,
+        most_blocks: most_blocks,
+      };
+      console.log(result);
+      return result;
+    });
+}
+
+goat_awards("players_stats.csv");
