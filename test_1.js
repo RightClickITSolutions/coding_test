@@ -8,3 +8,20 @@ However, in computer memory, 1 KB is equal to 1,024 bytes, and so on. So the act
 Write a program that prompts the user to enter the size of the hard drive specified by the manufacturer, on the hard drive box, and outputs the actual storage capacity of the hard drive.
 
  */
+
+const prompt = require("prompt-sync")({ sigint: true });
+
+const manufacturerSize = prompt(
+  "Enter the size of the hard drive specified by the manufacturer (in GB): "
+);
+
+const manufacturerBytesPerGB = 1000 * 1000 * 1000;
+const actualBytesPerGB = 1024 * 1024 * 1024;
+const actualSize =
+  (manufacturerSize * manufacturerBytesPerGB) / actualBytesPerGB;
+
+console.log(
+  "The actual storage capacity of the hard drive is approximately  " +
+    actualSize.toFixed(2) +
+    "GB."
+);
