@@ -1,0 +1,24 @@
+{
+  "name": "right_click_it_solution-coding_test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test_1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UbongJacob/right_click_IT_solution-coding_test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UbongJacob/right_click_IT_solution-coding_test/issues"
+  },
+  "homepage": "https://github.com/UbongJacob/right_click_IT_solution-coding_test#readme",
+  "dependencies": {
+    "csv-parser": "^3.0.0",
+    "prompt-sync": "^4.2.0"
+  }
+}

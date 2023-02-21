@@ -36,3 +36,47 @@ It should return a dictionary like this:
 }
 
 */
+
+const fs = require("fs");
+const csv = require("csv-parser");
+
+function goat_awards(csv_file) {
+  let stats = {
+    most_points: ["", 0],
+    most_assists: ["", 0],
+    most_rebounds: ["", 0],
+    most_blocks: ["", 0],
+  };
+
+  fs.createReadStream(csv_file)
+    .pipe(csv())
+    .on("data", (data) => {
+      let name = data.name;
+      let points = parseInt(data.points);
+      let assists = parseInt(data.assists);
+      let rebounds = parseInt(data.rebounds);
+      let blocks = parseInt(data.blocks);
+
+      if (points > stats.most_points[1]) {
+        stats.most_points = [name, points];
+      }
+
+      if (assists > stats.most_assists[1]) {
+        stats.most_assists = [name, assists];
+      }
+
+      if (rebounds > stats.most_rebounds[1]) {
+        stats.most_rebounds = [name, rebounds];
+      }
+
+      if (blocks > stats.most_blocks[1]) {
+        stats.most_blocks = [name, blocks];
+      }
+    })
+    .on("end", () => {
+      console.log(stats);
+    });
+}
+
+// Example usage:
+goat_awards("players_stats.csv");
