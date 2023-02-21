@@ -39,3 +39,77 @@ function findWord(word):
     return
 
 */
+
+function findWord(puzzle, word) {
+    const numRows = puzzle.length;
+    const numCols = puzzle[0].length;
+    const wordLen = word.length;
+
+    // Check if the word can fit horizontally
+    for (let row = 0; row < numRows; row++) {
+        for (let col = 0; col <= numCols - wordLen; col++) {
+            let match = true;
+            for (let i = 0; i < wordLen; i++) {
+                if (puzzle[row][col+i] !== word[i]) {
+                    match = false;
+                    break;
+                }
+            }
+            if (match) {
+                return { direction: 'horizontal', row, col };
+            }
+        }
+    }
+
+    // Check if the word can fit vertically
+    for (let row = 0; row <= numRows - wordLen; row++) {
+        for (let col = 0; col < numCols; col++) {
+            let match = true;
+            for (let i = 0; i < wordLen; i++) {
+                if (puzzle[row+i][col] !== word[i]) {
+                    match = false;
+                    break;
+                }
+            }
+            if (match) {
+                return { direction: 'vertical', row, col };
+            }
+        }
+    }
+
+    // Check if the word can fit diagonally from left to right
+    for (let row = 0; row <= numRows - wordLen; row++) {
+        for (let col = 0; col <= numCols - wordLen; col++) {
+            let match = true;
+            for (let i = 0; i < wordLen; i++) {
+                if (puzzle[row+i][col+i] !== word[i]) {
+                    match = false;
+                    break;
+                }
+            }
+            if (match) {
+                return { direction: 'diagonal-left-to-right', row, col };
+            }
+        }
+    }
+
+    // Check if the word can fit diagonally from right to left
+    for (let row = 0; row <= numRows - wordLen; row++) {
+        for (let col = wordLen - 1; col < numCols; col++) {
+            let match = true;
+            for (let i = 0; i < wordLen; i++) {
+                if (puzzle[row+i][col-i] !== word[i]) {
+                    match = false;
+                    break;
+                }
+            }
+            if (match) {
+                return { direction: 'diagonal-right-to-left', row, col };
+            }
+        }
+    }
+
+    // If the word wasn't found, return a message
+    return "Word not found";
+}
+

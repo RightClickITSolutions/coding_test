@@ -59,3 +59,37 @@ def findWord(word):
 word = str(input("Enter the word to search for in UPPERCASE: "))
 
 print(findWord(word))
+
+
+def findWord(word):
+    # First, we need to check all possible starting positions for the word.
+    # There are four directions: horizontal (left to right), vertical (top to bottom),
+    # and the two diagonals (top-left to bottom-right, and top-right to bottom-left).
+    for row in range(tableHeight):
+        for col in range(tableLength):
+            if puzzle[row][col] == word[0]:
+                # We found the first letter of the word at this position, so we need
+                # to check the rest of the letters in all four directions.
+                # First, horizontal (left to right):
+                if col + len(word) <= tableLength and \
+                        all(puzzle[row][col+i] == word[i] for i in range(len(word))):
+                    return f"{word} found at ({row},{col}) to ({row},{col+len(word)-1})"
+                # Vertical (top to bottom):
+                if row + len(word) <= tableHeight and \
+                        all(puzzle[row+i][col] == word[i] for i in range(len(word))):
+                    return f"{word} found at ({row},{col}) to ({row+len(word)-1},{col})"
+                # Diagonal (top-left to bottom-right):
+                if row + len(word) <= tableHeight and col + len(word) <= tableLength and \
+                        all(puzzle[row+i][col+i] == word[i] for i in range(len(word))):
+                    return f"{word} found at ({row},{col}) to ({row+len(word)-1},{col+len(word)-1})"
+                # Diagonal (top-right to bottom-left):
+                if row + len(word) <= tableHeight and col - len(word) >= -1 and \
+                        all(puzzle[row+i][col-i] == word[i] for i in range(len(word))):
+                    return f"{word} found at ({row},{col}) to ({row+len(word)-1},{col-len(word)+1})"
+    # If we got here, it means we didn't find the word in any direction.
+    return f"{word} not found"
+
+# To use this function, you can simply call it with the word you want to search for as the argument, like this:
+word = input("Enter the word to search for in UPPERCASE: ")
+result = findWord(word)
+print(result)
