@@ -36,3 +36,72 @@ It should return a dictionary like this:
 }
 
 */
+
+const fs = require('fs');
+const parse = require('csv-parse/lib/sync');
+
+function goat_awards(csv_file) {
+    const data = fs.readFileSync(csv_file, 'utf-8');
+    const rows = parse(data, { columns: true });
+    const players = {};
+
+    rows.forEach(row => {
+        const name = row.name;
+        const points = parseInt(row.points);
+        const rebounds = parseInt(row.rebounds);
+        const assists = parseInt(row.assists);
+        const blocks = parseInt(row.blocks);
+
+        if (!players[name]) {
+            players[name] = {
+                points: 0,
+                rebounds: 0,
+                assists: 0,
+                blocks: 0
+            };
+        }
+
+        players[name].points += points;
+        players[name].rebounds += rebounds;
+        players[name].assists += assists;
+        players[name].blocks += blocks;
+    });
+
+    const most_points = Object.entries(players).reduce((acc, [name, stats]) => {
+        if (stats.points > acc[1]) {
+            return [name, stats.points];
+        }
+        return acc;
+    }, ['', 0]);
+
+    const most_assists = Object.entries(players).reduce((acc, [name, stats]) => {
+        if (stats.assists > acc[1]) {
+            return [name, stats.assists];
+        }
+        return acc;
+    }, ['', 0]);
+
+    const most_rebounds = Object.entries(players).reduce((acc, [name, stats]) => {
+        if (stats.rebounds > acc[1]) {
+            return [name, stats.rebounds];
+        }
+        return acc;
+    }, ['', 0]);
+
+    const most_blocks = Object.entries(players).reduce((acc, [name, stats]) => {
+        if (stats.blocks > acc[1]) {
+            return [name, stats.blocks];
+        }
+        return acc;
+    }, ['', 0]);
+
+    return {
+        most_points,
+        most_assists,
+        most_rebounds,
+        most_blocks
+    };
+}
+
+const result = goat_awards('players_stats.csv');
+console.log(result);
