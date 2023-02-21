@@ -20,6 +20,6 @@ const totalCostOfProd = milkProduced * costOfProdPerLiter;
 
 const totalProfit = profitPerCarton * totalCartonsProduced;
 
-console.log("Number of cartons needed to hold milk: " + totalCartonsProduced);
-console.log("Cost of production of milk: " + totalCostOfProd);
-console.log("Profit for producing milk: " + totalProfit);
+console.log(`Number of cartons needed to hold milk: ${totalCartonsProduced} `);
+console.log(`Cost of production of milk: ${totalCostOfProd}`);
+console.log(`Profit for producing milk: ${totalProfit}`);
