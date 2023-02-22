@@ -6,3 +6,13 @@ A milk carton can hold 3.78 liters of milk. Each morning, a dairy farm ships car
 	- Outputs the profit for producing milk.
 
  */
+
+ const cartonCapacity = 3.78;
+ const costOfProd = 250;
+ const profitPerCarton = 180;
+
+ const amountProduced = prompt('Enter amount produced in the morning in Litres');
+ const cartonsProduced = Math.round(amountProduced/cartonCapacity)
+ alert(`${cartonsProduced} cartons are needed to hold the milk`);
+ alert(`The cost of production is ${cartonsProduced * costOfProd}₦.`)
+ alert(`Total Profit made is ${cartonsProduced * profitPerCarton}₦.`);
