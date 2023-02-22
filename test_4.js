@@ -11,6 +11,8 @@ Note: The words are basketball terms and positions eg SMALLFORWARD, POWERFORWARD
 
 */
 
+const prompt = require("prompt-sync")({ sigint: true });
+
 const puzzle = [
   [
     "P",
@@ -397,7 +399,6 @@ function findWord(word, puzzle) {
   return "Word not found";
 }
 
-// const word = prompt("Please enter word");
-const word = "game";
+const word = prompt("Please enter word: ");
 
 console.log(findWord(word, puzzle));
