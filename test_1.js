@@ -15,4 +15,4 @@ Write a program that prompts the user to enter the size of the hard drive specif
 
  const sizeInBytes = specifiedSize * oneGB;
 
- alert(`The actual storage capacity of the hard drive is ${(sizeInBytes/1024)/1000000} GB`)
+ alert(`The actual storage capacity of the hard drive is ${(sizeInBytes/1024)/1000000} GB`);
