@@ -9,9 +9,10 @@ Write a program that prompts the user to enter the size of the hard drive specif
 
  */
 
+const prompt = require("prompt-sync")({ sigint: true }); //imports propmt sync
+
 let manufacturerSize = prompt(
-  "Enter the size of the storage as specified by the manufacturer",
-  "0"
+  "Enter the size of the storage as specified by the manufacturer: "
 );
 
 manufacturerSize = parseFloat(manufacturerSize);
@@ -22,5 +23,7 @@ const bytesPerKiB = 1024;
 const actualSize = (manufacturerSize * bytesPerGB) / Math.pow(bytesPerKiB, 3);
 
 console.log(
-  `The actual storage capacity of the hard drive is approximately ${actualSize} GB.`
+  `The actual storage capacity of the hard drive is approximately ${actualSize.toFixed(
+    2
+  )} GB.`
 );
