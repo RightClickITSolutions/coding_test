@@ -36,3 +36,55 @@ It should return a dictionary like this:
 }
 
 */
+
+const fs = require("fs");
+
+function goat_awards(csv_file) {
+  const data = fs.readFileSync(csv_file, "utf-8");
+  const lines = data.split("\n").filter((line) => line.trim() !== "");
+
+  const players = {};
+  lines.forEach((line) => {
+    const [name, game, points, rebounds, assists, threes, steals, blocks] =
+      line.split(",");
+    if (!players[name]) {
+      players[name] = {
+        points: 0,
+        rebounds: 0,
+        assists: 0,
+        threes: 0,
+        steals: 0,
+        blocks: 0,
+      };
+    }
+    players[name].points += parseInt(points);
+    players[name].rebounds += parseInt(rebounds);
+    players[name].assists += parseInt(assists);
+    players[name].threes += parseInt(threes);
+    players[name].steals += parseInt(steals);
+    players[name].blocks += parseInt(blocks);
+  });
+
+  const mostPoints = Object.keys(players).reduce((a, b) =>
+    players[a].points > players[b].points ? a : b
+  );
+  const mostAssists = Object.keys(players).reduce((a, b) =>
+    players[a].assists > players[b].assists ? a : b
+  );
+  const mostRebounds = Object.keys(players).reduce((a, b) =>
+    players[a].rebounds > players[b].rebounds ? a : b
+  );
+  const mostBlocks = Object.keys(players).reduce((a, b) =>
+    players[a].blocks > players[b].blocks ? a : b
+  );
+
+  return {
+    most_points: [mostPoints, players[mostPoints].points],
+    most_assists: [mostAssists, players[mostAssists].assists],
+    most_rebounds: [mostRebounds, players[mostRebounds].rebounds],
+    most_blocks: [mostBlocks, players[mostBlocks].blocks],
+  };
+}
+
+const result = goat_awards("players_stats.csv");
+console.log(result);
