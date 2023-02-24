@@ -36,3 +36,22 @@ It should return a dictionary like this:
 }
 
 """
+
+import csv
+
+def goat_awards(csv_file):
+    with open(csv_file, 'r') as file:
+        reader = csv.DictReader(file)
+        players = list(reader)
+    
+    most_points = max(players, key=lambda x: int(x['points']))
+    most_assists = max(players, key=lambda x: int(x['assists']))
+    most_rebounds = max(players, key=lambda x: int(x['rebounds']))
+    most_blocks = max(players, key=lambda x: int(x['blocks']))
+    
+    return {
+        'most_points': [most_points['name'], int(most_points['points'])],
+        'most_assists': [most_assists['name'], int(most_assists['assists'])],
+        'most_rebounds': [most_rebounds['name'], int(most_rebounds['rebounds'])],
+        'most_blocks': [most_blocks['name'], int(most_blocks['blocks'])]
+    }
