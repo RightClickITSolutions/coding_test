@@ -48,12 +48,49 @@ def displayResultTable(positions):
 			puzzle[row][column] = '0'
 			print(puzzle[row][column], end='      ')
 			if row == positions[0][0] and column == positions[0][1]:
-				print(puzzle[row][column], end='      ')
-				
+				print(puzzle[row][column], end='      ')				
 
 def findWord(word):
-
-    return
+    
+    word_length = len(word)
+    
+    for i in range(tableHeight):
+        for j in range(tableLength):
+            if puzzle[i][j] == word[0]:
+    
+                # check horizontally to the right
+                if j + word_length <= len(puzzle[i]) and ''.join(puzzle[i][j:j+word_length]) == word:
+                    return [(i, k) for k in range(j, j+word_length)]
+                
+                # check horizontally to the left
+                if j - word_length >= -1 and ''.join(puzzle[i][j-word_length+1:j+1][::-1]) == word:
+                    return [(i, k) for k in range(j, j+word_length)]
+                
+                # check vertically downwards
+                if i + word_length <= len(puzzle) and ''.join([puzzle[k][j] for k in range(i,i+word_length)]) == word:
+                    return [(k, j) for k in range(i, i+word_length)]
+                
+                # check vertically upwards
+                if i - word_length >= -1 and ''.join([puzzle[k][j] for k in range(i-word_length+1,i+1)][::-1]) == word:
+                    return [(k, j) for k in range(i, i+word_length)]
+                
+                # check diagonally bottom-right
+                if i + word_length <= len(puzzle) and j + word_length <= len(puzzle[i]) and ''.join([puzzle[i+k][j+k] for k in range(word_length)]) == word:
+                    return [(i+k, j+k) for k in range(word_length)]
+                
+                # check diagonally bottom-left
+                if i + word_length <= len(puzzle) and j - word_length >= -1 and ''.join([puzzle[i+k][j-k] for k in range(word_length)]) == word:
+                    return [(i+k, j-k) for k in range(word_length)]
+                
+                # check diagonally top-right
+                if i - word_length >= -1 and j + word_length <= len(puzzle[i]) and ''.join([puzzle[i-k][j+k] for k in range(word_length)][::-1]) == word:
+                    return [(i-k, j+k) for k in range(word_length)]
+                
+                # check diagonally top-left
+                if i - word_length >= -1 and j - word_length >= -1 and ''.join([puzzle[i-k][j-k] for k in range(word_length)][::-1]) == word:
+                    return [(i-k, j-k) for k in range(word_length)]
+    
+    return "word not found"
 
 word = str(input("Enter the word to search for in UPPERCASE: "))
 
