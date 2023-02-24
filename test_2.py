@@ -6,3 +6,18 @@ A milk carton can hold 3.78 liters of milk. Each morning, a dairy farm ships car
 	- Outputs the profit for producing milk.
 
 """
+
+milk_produced = float(input("Enter the total amount of milk produced in liters: "))
+
+# number of milk cartons needed to hold the milk
+cartons_needed = round(milk_produced / 3.78)
+
+# cost of producing the milk
+production_cost = milk_produced * 250
+
+# profit for producing the milk
+profit = cartons_needed * 180
+
+print("Number of milk cartons needed: {}".format(cartons_needed))
+print("Cost of producing milk: ₦{:.2f}".format(production_cost))
+print("Profit for producing milk: ₦{:.2f}".format(profit))
