@@ -36,3 +36,47 @@ It should return a dictionary like this:
 }
 
 """
+
+
+def disp_results():
+    file = open('players_stats.csv', mode='r')
+    names_array = []
+    points_arr = []
+    assists_arr = []
+    rebounds_arr = []
+    blocks_arr = []
+
+    for row in file:
+        row = row.replace('\n', '')
+        id = row.split(',')
+        names_array.append(id[0])
+        points_arr.append(int(id[1]))
+        assists_arr.append(int(id[2]))
+        rebounds_arr.append(int(id[3]))
+        blocks_arr.append(int(id[4]))
+
+    max_points = max(points_arr)
+    points_list = [names_array[points_arr.index(max_points)], max_points]
+
+    max_assists = max(assists_arr)
+    assists_list = [names_array[assists_arr.index(max_assists)], max_assists]
+
+    max_rebounds = max(rebounds_arr)
+    rebounds_list = [
+        names_array[rebounds_arr.index(max_rebounds)], max_rebounds]
+
+    max_blocks = max(blocks_arr)
+    blocks_list = [names_array[blocks_arr.index(max_blocks)], max_blocks]
+
+    result = {
+        'most_points': points_list,
+        'most_assists': assists_list,
+        'most_rebounds': rebounds_list,
+        'most_blocks': blocks_list
+    }
+
+    print(result)
+    return result
+
+
+disp_results()
