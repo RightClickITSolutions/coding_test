@@ -9,7 +9,6 @@ Note: The words are basketball terms and positions eg SMALLFORWARD, POWERFORWARD
 
 #WRITE YOUR SOLUTION IN HERE
 
-
 puzzle = [
     ['P','G','T','H','S','S','M','A','L','L','F','O','R','W','A','R','D','J'],
     ['U','N','T','T','O','N','H','E','I','R','N','B','T','M','V','E','E','W'],
