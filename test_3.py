@@ -36,3 +36,41 @@ It should return a dictionary like this:
 }
 
 """
+
+""" 
+name: Akeju Oluwanifemi
+email: akejunifemi11@gmail.com
+ """
+
+import csv
+from collections import defaultdict
+
+def goat_awards(csv_file):
+    with open(csv_file) as file:
+        reader = csv.reader(file)
+        next(reader)  # Skip the header row
+        stats = defaultdict(lambda: [0, 0, 0, 0])  # Dictionary with default values [0, 0, 0, 0] for points, rebounds, assists, and blocks
+        for row in reader:
+            name = row[0]
+            points = int(row[2])
+            rebounds = int(row[3])
+            assists = int(row[4])
+            blocks = int(row[7])
+            stats[name][0] += points
+            stats[name][1] += rebounds
+            stats[name][2] += assists
+            stats[name][3] += blocks
+        
+        most_points = max(stats.items(), key=lambda x: x[1][0])
+        most_assists = max(stats.items(), key=lambda x: x[1][2])
+        most_rebounds = max(stats.items(), key=lambda x: x[1][1])
+        most_blocks = max(stats.items(), key=lambda x: x[1][3])
+        
+        return {
+            "most_points": [most_points[0], most_points[1][0]],
+            "most_assists": [most_assists[0], most_assists[1][2]],
+            "most_rebounds": [most_rebounds[0], most_rebounds[1][1]],
+            "most_blocks": [most_blocks[0], most_blocks[1][3]],
+        }
+
+print(goat_awards("players_stats.csv"))

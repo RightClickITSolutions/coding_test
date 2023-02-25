@@ -7,6 +7,12 @@ OUTPUT: If it finds the word, it should return the position of the word. If it d
 Note: The words are basketball terms and positions eg SMALLFORWARD, POWERFORWARD, GUARD etc
 """
 
+""" 
+name: Akeju Oluwanifemi
+email: akejunifemi11@gmail.com
+
+ """
+
 #WRITE YOUR SOLUTION IN HERE
 
 
@@ -52,10 +58,31 @@ def displayResultTable(positions):
 				print(puzzle[row][column], end='      ')
 				
 
-def findWord(word):
 
-    return
 
 word = str(input("Enter the word to search for in UPPERCASE: "))
 
-print(findWord(word))
+def findWord(puzzle, word):
+    word_length = len(word)
+    for i in range(18):
+        for j in range(18):
+            if puzzle[i][j] == word[0]:
+                # Check in all eight directions
+                for x, y in [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]:
+                    # Calculate the end position of the word in this direction
+                    end_i = i + (word_length - 1) * x
+                    end_j = j + (word_length - 1) * y
+                    # Check if the end position is within the puzzle boundaries
+                    if end_i >= 0 and end_i < 18 and end_j >= 0 and end_j < 18:
+                        # Check if the word is found in this direction
+                        found = True
+                        for k in range(1, word_length):
+                            if puzzle[i + k*x][j + k*y] != word[k]:
+                                found = False
+                                break
+                        if found:
+                            return f"Word found starting at position ({i},{j}) and ending at position ({end_i},{end_j})"
+    return "Word not found"
+
+
+print(find_word(puzzle, word))

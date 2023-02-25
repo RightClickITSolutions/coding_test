@@ -7,3 +7,20 @@ However, in computer memory, 1 KB is equal to 1,024 bytes, and so on. So the act
 
 Write a program that prompts the user to enter the size of the hard drive specified by the manufacturer, on the hard drive box, and outputs the actual storage capacity of the hard drive.
 """
+
+
+"""
+name: Akeju Oluwanifemi
+email: akejunifemi11@gmail.com
+
+"""
+
+""" userInput = int(input("Hello user. Please enter your supposed hard drive storage capacity: ")) """
+
+supposed_size_manufacturer = int(
+    input("Enter the size of the hard drive specified by the manufacturer in GB: "))
+
+# calculate the actual storage capacity of the hard drive
+size_actual = supposed_size_manufacturer * 1000**3 / 1024**3
+
+print(f"The actual size of the hard drive is {round(size_actual,2)} GB")
