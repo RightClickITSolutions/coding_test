@@ -33,13 +33,15 @@ void business_analyzer()
 	const double cost_per_litre = 250;
 	const double profit_per_carton = 180;
 	double total_volume;
-	int carton_num = ceil(total_volume / volume_per_carton);
-	double total_profit = carton_num * profit_per_carton;
+//	int carton_num = ceil(total_volume / volume_per_carton);
+//	double total_profit = carton_num * profit_per_carton;
 
 	printf("Enter the total amount (in litres) of milk produced in the morning:\n");
 
 	if (scanf("%lf", &total_volume) == 1)
 	{
+		int carton_num = ceil(total_volume / volume_per_carton);
+		double total_profit = carton_num * profit_per_carton;
 		double total_cost = cost_per_litre * total_volume;
 
 		if (total_volume >= 0)
