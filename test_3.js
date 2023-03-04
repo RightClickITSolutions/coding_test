@@ -36,3 +36,57 @@ It should return a dictionary like this:
 }
 
 */
+
+/*
+
+I used in my solution the "fs" module to read the csv file and the "csv-parser"
+module to parse the csv data. It defines an empty object stats with keys 
+for the different stats to track, and then uses the `on('data')` event handler 
+to iterate over each row in the csv file. For each row, it extracts the relevant data, 
+compares it to the current leader in that stat, and updates `stats` if the new data is higher. 
+Finally, it outputs `stats` to the console using the `on('end')` event handler.
+
+*/
+
+const fs = require('fs');
+const csv = require('csv-parser');
+
+function goat_awards(csv_file) {
+  const stats = {
+    most_points: ['', 0],
+    most_assists: ['', 0],
+    most_rebounds: ['', 0],
+    most_blocks: ['', 0]
+  };
+
+  fs.createReadStream(csv_file)
+    .pipe(csv())
+    .on('data', (row) => {
+      const name = row['name'];
+      const points = parseInt(row['points']);
+      const assists = parseInt(row['assists']);
+      const rebounds = parseInt(row['rebounds']);
+      const blocks = parseInt(row['blocks']);
+
+      if (points > stats.most_points[1]) {
+        stats.most_points = [name, points];
+      }
+
+      if (assists > stats.most_assists[1]) {
+        stats.most_assists = [name, assists];
+      }
+
+      if (rebounds > stats.most_rebounds[1]) {
+        stats.most_rebounds = [name, rebounds];
+      }
+
+      if (blocks > stats.most_blocks[1]) {
+        stats.most_blocks = [name, blocks];
+      }
+    })
+    .on('end', () => {
+      console.log(stats);
+    });
+}
+
+goat_awards('stats.csv');
